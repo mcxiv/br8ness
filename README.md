@@ -29,6 +29,13 @@ crontab -e
 @reboot /usr/bin/python3 ~/Documents/br8ness/src/br8ness.py
 ```
 
+
+You could also start it manually, in the background, by doing the following:
+
+```bash
+nohup python3 br8ness.py &
+```
+
 ## Contributing
 
 Feel free to contribute to this project, I'm open to suggestions and improvements.
