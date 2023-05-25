@@ -44,7 +44,12 @@ if __name__ == '__main__':
     os.system('xrandr --output eDP-1 --brightness 1.0')
 
     while 1:
-        focus = get_focused_window_info()
+        try:
+            focus = get_focused_window_info()
+        except Exception as e:
+            focus = None
+            print(e)
+
         if focus in list_of_process and not flag_brightness:
             os.system('xrandr --output eDP-1 --brightness 1.8')
             flag_brightness = True
