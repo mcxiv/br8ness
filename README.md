@@ -2,7 +2,7 @@
 
 **br8ness** is a simple brightness tool for linux. It will automatically detect the application that is currently in focus and adjust the brightness accordingly to all your connected monitors.
 
-In our example, the brightness will be set to **180%** when the application in focus is whether **Terminator**, or **Visual Studio Code (Insiders)**, and **100%** otherwise.
+In our example, the brightness will be set to **180%** when the application in focus is in the environment variable **BR8NESS_LIST_OF_PROCESS**. Otherwise, it will be set to **100%**.
 
 ## Installation
 
@@ -10,6 +10,13 @@ In our example, the brightness will be set to **180%** when the application in f
 
 ```bash
 python3 -m pip install -r requirements.txt
+```
+
+In your environment variables, add the following:
+
+```bash
+# Each processus name must be separated by a comma
+BR8NESS_LIST_OF_PROCESS='processus_name_1,processus_name_2,processus_name_3'
 ```
 
 ## Usage

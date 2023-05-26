@@ -15,9 +15,6 @@ import psutil
 # --------------------------------------------------
 
 
-list_of_process = ['x-terminal-emul', 'code-insiders']
-
-
 def get_displays():
     """
     The function "get_displays" uses the xrandr command to list all connected monitors and returns a
@@ -51,12 +48,21 @@ def get_focused_window_info():
 
 
 if __name__ == '__main__':
-    # The list of displays to change the brightness
-    displays = get_displays()
+    # The list of processes that will trigger the brightness change
+    list_of_process = os.getenv('BR8NESS_LIST_OF_PROCESS')
+    if list_of_process == '' or list_of_process is None:
+        sys.exit('The environment variable BR8NESS_LIST_OF_PROCESS is not set.')
+    list_of_process = list_of_process.split(',')
+
+    # Timer to avoid calling too many times the system command
+    # that lists the connected displays
+    timer_display = 0
 
     # The flag is used to avoid calling too many times the system command
     flag_brightness = False
 
+    # The list of displays to change the brightness
+    displays = get_displays()
     # Set the brightness to 1.0 at the beginning
     for display in displays:
         os.system(f'xrandr --output {display} --brightness 1.0')
@@ -67,6 +73,11 @@ if __name__ == '__main__':
         except Exception as e:
             focus = None
             print(e)
+
+        if time.time() - timer_display > 5:
+            # The list of displays to change the brightness
+            displays = get_displays()
+            timer_display = time.time()
 
         if focus in list_of_process and not flag_brightness:
             for display in displays:
