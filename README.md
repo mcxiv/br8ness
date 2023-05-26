@@ -1,6 +1,6 @@
 # br8ness
 
-**br8ness** is a simple brightness tool for linux. It will automatically detect the application that is currently in focus and adjust the brightness accordingly.
+**br8ness** is a simple brightness tool for linux. It will automatically detect the application that is currently in focus and adjust the brightness accordingly to all your connected monitors.
 
 In our example, the brightness will be set to **180%** when the application in focus is whether **Terminator**, or **Visual Studio Code (Insiders)**, and **100%** otherwise.
 
